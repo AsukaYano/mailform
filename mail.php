@@ -11,17 +11,17 @@ if(!isset($_POST['token'])) {
 }
 
 //キーとトークンが一致したら管理者に入力内容がメールで送られる
-if($_SESSION['key'] === $_POST['token']) {
-  $to = $_SESSION['to'];
-  $title = $_SESSION['title'];
-  $message = $_SESSION['message'];
+if(!empty($_SESSION['key'] === $_POST['token'])) {
+  $to = (!empty($_SESSION["to"]));
+  $title = (!empty($_SESSION["title"]));
+  $message = (!empty($_SESSION["message"]));
   
   //文字化け対策
          mb_language("Japanese");
          mb_internal_encoding("UTF-8");
 
 
-         if(mb_send_mail($to, $title, $message, $header)){
+         if(mb_send_mail('yano53118918@gmail.com', $title, $message, (!empty($header)))){
              //メールが送信出来たら$_SESSIONの値をクリア
     $_SESSION = array();
 
